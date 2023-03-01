@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import "../index.css";
 import Square from "./Square";
 
@@ -16,19 +15,19 @@ const COORDS = [
 export default function Board() {
   return (
     <div id="layer-board">
-      {COORDS.map((row, x) => (row.map((coord, y) => (
-	<Square
+      {COORDS.map((row, x) => row.map((coord, y) => (
+        <Square
           style={{
             backgroundColor: (
               x % 2
-                ? y % 2 ? "pink" : "blue"
-		: y % 2 ? "blue" : "pink"
+		? y % 2 ? "var(--my-white)" : "var(--my-black)"
+		: y % 2 ? "var(--my-black)": "var(--my-white)"
             ),
             width: "100%",
             height: "100%",
           }}
-          coord/>
-      ))))}
+          coord={coord}/>
+      )))}
     </div>
   );
 }
