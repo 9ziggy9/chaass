@@ -1,11 +1,12 @@
 import "../index.css";
 
-export default function Square({coord, style}) {
+export default function Square({coord, piece, style}) {
   return (
     <div
+      onClick={() => console.log(coord, piece)}
       id={coord}
-      key={coord}
       style={style}
+      className={piece}
     ></div>
   );
 }
