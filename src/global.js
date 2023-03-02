@@ -8,3 +8,24 @@ export const COORDS = [
   ["a2", "b2", "c2", "d2", "e2", "f2", "g2", "h2"],
   ["a1", "b1", "c1", "d1", "e1", "f1", "g1", "h1"],
 ];
+
+export const COLORS = {
+  myBlack: "#282828",
+  myBlue: "#076678",
+  myLightBlue: "#458588",
+  myAqua: "#689d6a",
+  myGreen: "#79740e",
+  myLightGreen: "#98971a",
+  myDarkGray: "#3c3836",
+  myLightGray: "#7c6f64",
+  myLighterGray: "#928374",
+  myWhite: "#fbf1c7",
+  myLightWhite: "#f9f5d7",
+  myRed: "#9d0006",
+  myMagenta: "#8f3f71",
+  myViolet: "#b16286",
+  myOrange: "#af3a03",
+  myLightOrange: "#d65d0e",
+  myYellow: "#b57614",
+  myLightYellow: "#d79921",
+};

@@ -26,10 +26,17 @@ function reducer(state, action) {
       ...state,
       board: newBoard(state.board)
     };
-    case "hello": {
-      console.log("Hello, world!"); 
-      break;
-    }
+    case "setHighlight": return {
+      ...state,
+      hl: action.payload
+    };
+    case "makeMove": {
+      const {piece, color, pCoord, dCoord} = action.payload;
+      return {
+        ...state,
+        board: {...state.board, [pCoord]: null, [dCoord]: piece+"_"+color}
+      };
+    };
     default: {
       console.log("huh?"); 
       break;
