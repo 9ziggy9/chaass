@@ -32,12 +32,6 @@ const newGame = (state) => {
 };
 
 export default function Board() {
-  const selected = useRef({
-    piece: null,
-    dest: null,
-  });
-  const [hl, setHl] = useState(null);
-
   const [game, setGame] = useState(
     COORDS.flat().reduce((acc, c) => ({...acc, [c]: null}), {})
   );
@@ -73,11 +67,6 @@ export default function Board() {
           color={game[coord]?.split("_")[1]}
           key={coord}
           coord={coord}
-          selected={selected}
-          game={game}
-          setGame={setGame}
-          hl={hl}
-          setHl={setHl}
         />
       )))}
     </div>
