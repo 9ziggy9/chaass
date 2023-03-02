@@ -1,26 +1,39 @@
 import "../index.css";
-import {useEffect, useState} from "react";
 
-export default function Square({
-  coord, piece, color,
-  game, style
-}) {
-  const [current, setCurrent] = useState(null);
-
-  function handleClick() {
-    setCurrent([coord, piece, color]);
+export default function Square({coord, piece, color, hl, setHl,
+                                selected, game, setGame, style}) {
+  function handleClick(e) {
+    if (!selected.current.piece) {
+      if (!piece) return;
+      selected.current.piece = [coord, piece, color];
+      setHl(e.target);
+      return;
+    }
+    if (!selected.current.dest) {
+      selected.current.dest = [coord, piece, color];
+      setGame({
+        ...game,
+        [selected.current.piece[0]]: null,
+        [selected.current.dest[0]]:
+	  selected.current.piece[1]+"_"+selected.current.piece[2],
+      });
+      selected.current.piece = null;
+      selected.current.dest = null;
+      setHl(null);
+      return;
+    }
   }
-
-  useEffect(() => {
-    console.log(current);
-  }, [current]);
 
   return (
     <div
       onClick={handleClick}
       id={coord}
       key={coord}
-      style={style}
+      style={{
+        ...style,
+	outline: (hl?.id === coord ? "solid 5px var(--my-blue)" : ""),
+	outlineOffset: (hl?.id === coord ? "-5px" : ""),
+      }}
     ></div>
   );
 }

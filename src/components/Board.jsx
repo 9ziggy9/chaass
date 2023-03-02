@@ -1,6 +1,6 @@
 import "../index.css";
 import Square from "./Square";
-import {useEffect, useState} from "react";
+import {useEffect, useState, useRef} from "react";
 
 const COORDS = [
   ["a8", "b8", "c8", "d8", "e8", "f8", "g8", "h8"],
@@ -32,8 +32,13 @@ const newGame = (state) => {
 };
 
 export default function Board() {
+  const selected = useRef({
+    piece: null,
+    dest: null,
+  });
+  const [hl, setHl] = useState(null);
+
   const [game, setGame] = useState(
-    // COMPUTED PROPERTY NAMES
     COORDS.flat().reduce((acc, c) => ({...acc, [c]: null}), {})
   );
 
@@ -68,7 +73,11 @@ export default function Board() {
           color={game[coord]?.split("_")[1]}
           key={coord}
           coord={coord}
+          selected={selected}
           game={game}
+          setGame={setGame}
+          hl={hl}
+          setHl={setHl}
         />
       )))}
     </div>
