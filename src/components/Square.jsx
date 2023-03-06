@@ -19,7 +19,7 @@ export default function Square({coord, piece, style, color,
       }});
       selected.current.piece = null;
       selected.current.dest = null;
-      dispatch({type: "setHighlight", payload: e.target});
+      dispatch({type: "setHighlight", payload: null});
       return;
     }
   }
