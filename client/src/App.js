@@ -1,23 +1,10 @@
 import React, {useReducer, useEffect} from "react";
 import Board from "./components/Board";
 import gameReducer from "./store/game.jsx";
+import chatReducer from "./store/chat.jsx";
 import Chat from "./components/Chat";
 import {Switch, Route} from "react-router-dom";
 import {COORDS} from "./global.js";
-
-function chatReducer(state, action) {
-  switch (action.type) {
-  case "sendMessage": {
-    return {
-      ...state,
-      outMsgs: [...state.outMsgs, action.payload]
-    };
-  }
-  default: {
-    return console.log("Huh?");
-  }
-  }
-}
 
 function App() {
   const [gameState, gameDispatch] = useReducer(
@@ -28,8 +15,7 @@ function App() {
   );
 
   const [chatState, chatDispatch] = useReducer(chatReducer, {
-    outMsgs: [],
-    incMsgs: [],
+    msgs: [],
   });
 
   useEffect(() => {

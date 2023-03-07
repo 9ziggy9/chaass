@@ -16,10 +16,11 @@ export default function Chat({state, dispatch}) {
         <h2 id="chat-title">CHAT</h2>
 	<div id="chat-inner">
           <div id="chat-feed">
-	    {state?.outMsgs.map((msg,i) =>
-              <div key={`msg-${i}`} className="out-msg">
+	    {state?.msgs.map((msg,i) =>
+              <div key={`msg-${i}`}
+                   className={`${msg.dir ? "inc-msg" : "out-msg"}`}>
                 <p className="msg">
-		  {msg}
+		  {msg.txt}
                 </p>
               </div>)}
           </div>
