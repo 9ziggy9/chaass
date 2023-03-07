@@ -1,5 +1,7 @@
 import React, {useReducer, useEffect} from "react";
 import Board from "./components/Board";
+import Chat from "./components/Chat";
+import {Switch, Route} from "react-router-dom";
 import {COORDS} from "./global.js";
 
 const newGame = (state) => {
@@ -65,7 +67,14 @@ function App() {
 
   return (
     <>
-      <Board state={state} dispatch={dispatch}/>
+      <Switch>
+        <Route path="/" exact>
+	  <Board state={state} dispatch={dispatch}/>
+        </Route>
+        <Route path="/chat-debug">
+          <Chat />
+        </Route>
+      </Switch>
     </>
   );
 }

@@ -26,6 +26,8 @@ html, body {
 }
 
 #root {
+    font-family: 'Anek Tamil', sans-serif;
+    font-size: 0.5rem;
     background-color: var(--my-dark-gray);
     height: 100vh;
     display: flex;
@@ -41,7 +43,7 @@ html, body {
     grid-template-rows: repeat(8, 6.25vw);
     grid-column-gap: 0px;
     grid-row-gap: 0px;
-    background-color:red;
+    background-color: green;
     border: 4px solid var(--my-lighter-gray);
 }
 
@@ -50,4 +52,74 @@ html, body {
     border: none;
     position: absolute;
     z-index: 2;
+}
+
+#chat-container {
+    color: var(--my-white);
+    display: grid;
+    grid-template-rows: auto 10fr;
+    align-items: center;
+    width: 50vw;
+    height: 90vh;
+}
+
+#chat-title {
+    box-sizing: border-box;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    display: flex;
+    margin-bottom:0;
+    padding-bottom:5px;
+    justify-content: center;
+    background-color: var(--my-yellow);
+}
+
+#chat-inner {
+    background-color: var(--my-black);
+    display: grid;
+    grid-template-rows: 10fr auto;
+    height: 100%;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    padding: 0.25rem;
+}
+
+#chat-input-container {
+    display: grid;
+    padding-inner: 0.25rem;
+    grid-template-rows: auto 1fr;
+    border-radius:5px;
+    padding:5px;
+}
+
+#chat-send-button {
+    border: none;
+    padding:0;
+    margin:0;
+    background-color: var(--my-yellow);
+    color: var(--my-white);
+    font-size: 0.025rem;
+    box-sizing: border-box;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+#chat-text {
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    resize:none;
+    overflow:hidden;
+    font-size: 0.75rem;
+    background-color: var(--my-light-white);
+    color: var(--my-black);
+    border-color: transparent;
+    box-sizing: border-box;
+}
+
+textarea:focus {
+  outline: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
