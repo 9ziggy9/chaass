@@ -109,13 +109,13 @@ html, body {
     border-top-right-radius: 5px;
     resize: none;
     overflow-y: scroll;
-    font-size: 0.75rem;
+    font-size: 1.5rem;
     background-color: var(--my-light-white);
     color: var(--my-black);
     border-color: transparent;
     box-sizing: border-box;
     min-height: 1.5rem;
-    max-height: 4.5rem;
+    max-height: 9rem;
 }
 
 textarea:focus {
