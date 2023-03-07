@@ -97,7 +97,6 @@ html, body {
     padding-inner: 0.25rem;
     grid-template-rows: auto 1fr;
     border-radius:5px;
-    padding:5px;
 }
 
 #chat-send-button {
@@ -117,13 +116,13 @@ html, body {
     border-top-right-radius: 5px;
     resize: none;
     overflow-y: scroll;
-    font-size: 1.5rem;
-    background-color: var(--my-light-white);
-    color: var(--my-black);
+    font-size: 1rem;
+    background-color: var(--my-dark-gray);
+    color: var(--my-white);
     border-color: transparent;
     box-sizing: border-box;
-    min-height: 1.5rem;
-    max-height: 9rem;
+    min-height: 1rem;
+    max-height: 6rem;
 }
 
 textarea:focus {
@@ -132,4 +131,31 @@ textarea:focus {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+}
+
+.out-msg {
+    display: flex;
+    justify-content: right;
+    font-size: 1rem;
+}
+
+.out-msg > p {
+    margin: 0.25rem;
+    margin-right: 0;
+    border-radius: 0.5rem;
+    padding: 0.75rem;
+    background-color: var(--my-dark-gray);
+}
+
+.inc-msg {
+    display: flex;
+    justify-content: left;
+    font-size: 1rem;
+}
+
+.inc-msg > p {
+    border-radius: 0.5rem;
+    padding: 0.75rem;
+    background-color: var(--my-light-gray);
+    color: var(--my-light-white);
 }
