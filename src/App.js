@@ -22,7 +22,7 @@ const newGame = (state) => {
   };
 };
 
-function reducer(state, action) {
+function gameReducer(state, action) {
   switch(action.type) {
   case "setHighlight":  return {
     ...state, 
@@ -54,22 +54,22 @@ function reducer(state, action) {
 };
 
 function App() {
-  const [state, dispatch] = useReducer(
-    reducer, {
-    hl: null,
-    board: COORDS.flat().reduce((acc, c) => ({...acc, [c]: null}), {})
+  const [gameState, gameDispatch] = useReducer(
+    gameReducer, {
+      hl: null,
+      board: COORDS.flat().reduce((acc, c) => ({...acc, [c]: null}), {})
     }
   );
 
   useEffect(() => {
-    dispatch({type: "newGame"});
+    gameDispatch({type: "newGame"});
   }, []);
 
   return (
     <>
       <Switch>
         <Route path="/" exact>
-	  <Board state={state} dispatch={dispatch}/>
+	  <Board state={gameState} dispatch={gameDispatch}/>
         </Route>
         <Route path="/chat-debug">
           <Chat />

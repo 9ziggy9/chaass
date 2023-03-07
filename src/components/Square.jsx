@@ -31,7 +31,7 @@ export default function Square({coord, piece, style, color,
       key={coord}
       style={{
         ...style,
-        outline: (state?.hl?.id === coord ? "solid 5px red" : ""),
+        outline: (state?.hl?.id === coord ? "solid 5px var(--my-violet)" : ""),
         outlineOffset: (state?.hl?.id === coord ? "-5px" : ""),
       }}
     ></div>
