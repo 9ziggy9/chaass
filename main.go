@@ -14,7 +14,6 @@ var upgrader = websocket.Upgrader{
   // FIXME: Allowing all CORS requests
   CheckOrigin: func(r *http.Request) bool { return true },
 }
-
       
 // ws message listener
 func reader(conn *websocket.Conn) {
