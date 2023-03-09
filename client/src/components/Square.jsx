@@ -34,7 +34,7 @@ export default function Square({coord, piece, color, selected, x, y}) {
       key={coord}
       style={{
         backgroundColor: (
-	x % 2
+	  x % 2
 	    ? y % 2 ? "var(--my-light-white)" : "var(--my-blue)"
 	    : y % 2 ? "var(--my-blue)": "var(--my-light-white)"
         ),
