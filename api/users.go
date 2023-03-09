@@ -2,28 +2,19 @@ package api
 
 import (
   "log"
-  "github.com/gorilla/mux"
-  "github.com/9ziggy9/chaass/models"
   "net/http"
   "gorm.io/gorm"
+  "github.com/9ziggy9/chaass/models"
 )
 
-func helloUser(w http.ResponseWriter, r *http.Request) {
-  log.Printf("Hello, world!")
-}
-
-func BuildUserRoutes(master *mux.Router) {
-  // log.Printf("Building User routes")
-  // router := master.PathPrefix("/users").Subrouter()
-
-  // router.HandleFunc("/", helloUser).Methods("GET")
-
-  // router.HandleFunc("/ziggy", func(w http.ResponseWriter, r *http.Request, db *gorm.DB) {
-  //   log.Printf("Hello, from Ziggy route")
-  //   user := models.User{Name: "Ziggy"}
-  //   result := db.Create(&user)
-  //   if result.Error != nil {
-  //     log.Fatalf("Failed to create user: %v", result.Error)
-  //   }
-  // }).Methods("GET")
+func GenerateZiggy(db *gorm.DB) func(w http.ResponseWriter, r *http.Request) {
+  return func(w http.ResponseWriter, r *http.Request) {
+    ziggy := models.User{Name: "Ziggy"}
+    result := db.Create(&ziggy)
+    if result.Error != nil {
+      http.Error(w, "Error creating user", http.StatusInternalServerError)
+      return
+    }
+    log.Printf("Created user: %d", ziggy.ID)
+  }
 }
