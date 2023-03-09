@@ -1,47 +1,58 @@
 package main
 
 import (
+  // "encoding/json"
   "log"
   "net/http"
   "os"
-  "github.com/gorilla/websocket"
+  // "github.com/gorilla/mux"
   "github.com/joho/godotenv"
+  "gorm.io/driver/sqlite"
+  "gorm.io/gorm"
+  "github.com/9ziggy9/chaass/models/game"
+  "github.com/9ziggy9/chaass/models/user"
 )
 
-var upgrader = websocket.Upgrader{
-  ReadBufferSize: 1024,
-  WriteBufferSize: 1024,
-  // FIXME: Allowing all CORS requests
-  CheckOrigin: func(r *http.Request) bool { return true },
-}
-      
-// ws message listener
-func reader(conn *websocket.Conn) {
-  for {
-    messageType, p, err := conn.ReadMessage()
-    if err != nil {
-      log.Println(err)
-      return
-    }
-
-    if err := conn.WriteMessage(messageType, p); err != nil {
-      log.Println(err)
-      return
-    }
+func loadEnv() (string, string) {
+  err := godotenv.Load()
+  if err != nil {
+    log.Fatalf("Error loading .env file: %v\n", err)
+    os.Exit(1)
   }
+  port := os.Getenv("PORT")
+  db := os.Getenv("DB_FILE")
+  return port, db
 }
 
-// websocket endpoint
-func serveWs(w http.ResponseWriter, r *http.Request) {
-  
+func connectToDB(db string) *gorm.DB {
+  conn, err := gorm.Open(
+    sqlite.Open(db+"?create=true"),
+    &gorm.Config{},
+  )
+  if err != nil {
+    log.Fatalf("Error connecting to database: %v\n", err)
+    os.Exit(1)
+  }
+  return conn
 }
 
 func main() {
-  err := godotenv.Load()
-  if err != nil {
-    log.Fatal("Error loading .env file")
+  port, db := loadEnv() // Can exit(1)!
+  dbConn := connectToDB(db) // Can exit(1)!
+
+  dbConn.AutoMigrate(&user.User{})
+
+  // TODO: We are going to abstract this in api module
+  // Create a new user
+  user := user.User{Name: "Ziggy"}
+  result := dbConn.Create(&user)
+  if result.Error != nil {
+    log.Fatalf("Failed to create user: %v", result.Error)
+    os.Exit(1)
   }
-  port := os.Getenv("PORT")
-  log.Println("Opening socket on port "+port+"...")
+
+  log.Println(port, db)
+  log.Println("Loaded module...", game.Hello())
+  log.Println("Listening on port "+port+"...")
   log.Fatal(http.ListenAndServe(":"+port, nil))
 }
