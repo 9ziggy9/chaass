@@ -8,17 +8,26 @@ import (
   "github.com/9ziggy9/chaass/models"
 )
 
+func getAllUsers(db *gorm.DB) ([]models.User, error) {
+  var users []models.User
+  result := db.Select("id, name").Find(&users)
+  if result.Error != nil {
+    return nil, result.Error
+  }
+  return users, nil
+}
+
 func GenerateGetUsers(db *gorm.DB) func(
   w http.ResponseWriter,
   r *http.Request,
 ) {
   return func(w http.ResponseWriter, r *http.Request) {
-    data := struct {
-      Message string `json:"message"`
-    }{
-      Message: "Hello, world",
+    users, err := getAllUsers(db)
+    if err != nil {
+      http.Error(w, "Database query failed", http.StatusInternalServerError)
+      return
     }
-    jsonData, err := json.Marshal(data)
+    jsonData, err := json.Marshal(users)
     if err != nil {
       http.Error(w, "Error encoding JSON", http.StatusInternalServerError)
       return
