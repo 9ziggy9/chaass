@@ -1,15 +1,15 @@
 package main
 
 import (
-  // "encoding/json"
   "log"
   "net/http"
   "os"
-  // "github.com/gorilla/mux"
   "github.com/joho/godotenv"
   "gorm.io/driver/sqlite"
   "gorm.io/gorm"
   "github.com/9ziggy9/chaass/models"
+  "github.com/9ziggy9/chaass/api"
+  "github.com/gorilla/mux"
 )
 
 func loadEnv() (string, string) {
@@ -35,6 +35,10 @@ func connectToDB(db string) *gorm.DB {
   return conn
 }
 
+func helloRoute(w http.ResponseWriter, r *http.Request) {
+  log.Printf("Hello, world!")
+}
+
 func main() {
   port, db := loadEnv() // Can exit(1)!
   dbConn := connectToDB(db) // Can exit(1)!
@@ -50,8 +54,11 @@ func main() {
     os.Exit(1)
   }
 
+  masterRouter := mux.NewRouter()
+  api.BuildUserRoutes(masterRouter)
+
   log.Println(port, db)
   log.Println("Loaded module...", models.Hello())
   log.Println("Listening on port "+port+"...")
-  log.Fatal(http.ListenAndServe(":"+port, nil))
+  log.Fatal(http.ListenAndServe(":"+port, masterRouter))
 }
