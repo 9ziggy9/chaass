@@ -6,6 +6,7 @@ import (
   "github.com/joho/godotenv"
   "github.com/9ziggy9/chaass/api"
   "github.com/9ziggy9/chaass/models"
+  "github.com/9ziggy9/chaass/seeders"
 )
 
 func loadEnv() (string, string) {
@@ -29,10 +30,13 @@ func main() {
   // MIGRATE
   app.MigrateModels(&models.User{})
 
+  app.RunSeeders(seeders.Users)
+
   // Note how routes are registered via passing a closure defined
   // From API module, quite interesting, this is done to include db
   // connection created on APP in the scope of route handlers
   app.RegisterRoute(api.GenerateZiggy, "/users", "/ziggy", "GET")
+  app.RegisterRoute(api.GenerateGetUsers, "/users", "/", "GET")
 
   // Make it happen
   app.Run(port)

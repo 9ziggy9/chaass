@@ -37,14 +37,21 @@ func (a *App) MigrateModels(ms ...interface{}) {
   }
 }
 
-func (a *App) RegisterRoute(
+func (a *App) RunSeeders(seeders ...interface{}) {
+  log.Println("Running seeders... ")
+  for _, seeds := range seeders {
+    a.DB.Create(seeds)
+  }
+}
+
+func (a *App) RegisterRoute( // BEGIN ARGS
   routeConstructor func(db *gorm.DB) func(
     w http.ResponseWriter,
     r *http.Request,
   ),
   subRoute string,
   route string,
-  method string,
+  method string, // END ARGS
 ) {
   subRouter := a.Router.PathPrefix(subRoute).Subrouter()
   subRouter.HandleFunc(route, routeConstructor(a.DB)).Methods(method)
