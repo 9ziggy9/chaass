@@ -1,7 +1,10 @@
 import "../index.css";
+import {useSelector, useDispatch} from "react-redux";
 
-export default function Square({coord, piece, style, color,
-                                state, dispatch, selected}) {
+export default function Square({coord, piece, style, color, selected}) {
+  const dispatch = useDispatch();
+  const game = useSelector(state => state.game);
+
   function handleClick(e) {
     if (!selected.current.piece) {
       if (!piece) return;
@@ -31,8 +34,8 @@ export default function Square({coord, piece, style, color,
       key={coord}
       style={{
         ...style,
-        outline: (state?.hl?.id === coord ? "solid 5px var(--my-violet)" : ""),
-        outlineOffset: (state?.hl?.id === coord ? "-5px" : ""),
+        outline: (game?.hl?.id === coord ? "solid 5px var(--my-violet)" : ""),
+        outlineOffset: (game?.hl?.id === coord ? "-5px" : ""),
       }}
     ></div>
   );

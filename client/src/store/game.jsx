@@ -1,3 +1,5 @@
+import {COORDS} from "../global.js";
+
 const newGame = (state) => {
   return {
     ...state,
@@ -16,7 +18,14 @@ const newGame = (state) => {
   };
 };
 
-export default function gameReducer(state={}, action) {
+const initialState = {
+  hl: null,
+  board: COORDS
+    .flat()
+    .reduce((acc, c) => ({...acc, [c]: null}), {})
+};
+
+export default function gameReducer(state=initialState, action) {
   switch(action.type) {
   case "setHighlight":  return {
     ...state, 
