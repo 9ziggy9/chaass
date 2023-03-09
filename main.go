@@ -20,10 +20,24 @@ func loadEnv() (string, string) {
   return port, db
 }
 
+func purgeDB(db string) {
+  if _, err := os.Stat(db); err == nil {
+    if err := os.Remove(db); err != nil {
+      log.Fatalf("Failed to purge database file: %v", err)
+      os.Exit(1)
+    }
+    log.Printf("Purged database file: %s", db)
+  }
+}
+
 func main() {
   port, db := loadEnv() // Can exit(1)!
 
-  // INITIALIZE DATABASE
+  // PURGE
+
+  purgeDB(db)
+
+  // INITIALIZE
   app := &api.App{}
   app.Initialize(db)
 
