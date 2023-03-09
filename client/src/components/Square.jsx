@@ -1,7 +1,7 @@
 import "../index.css";
 import {useSelector, useDispatch} from "react-redux";
 
-export default function Square({coord, piece, style, color, selected}) {
+export default function Square({coord, piece, color, selected, x, y}) {
   const dispatch = useDispatch();
   const game = useSelector(state => state.game);
 
@@ -33,7 +33,19 @@ export default function Square({coord, piece, style, color, selected}) {
       id={coord}
       key={coord}
       style={{
-        ...style,
+        backgroundColor: (
+	x % 2
+	    ? y % 2 ? "var(--my-light-white)" : "var(--my-blue)"
+	    : y % 2 ? "var(--my-blue)": "var(--my-light-white)"
+        ),
+        width: "100%",
+        height: "100%",
+        backgroundSize: "contain",
+        backgroundImage: (
+	  game.board[coord]
+	    ? `url(${require(`../img/${piece+"_"+color}.png`)})`
+	  : ""
+        ),
         outline: (game?.hl?.id === coord ? "solid 5px var(--my-violet)" : ""),
         outlineOffset: (game?.hl?.id === coord ? "-5px" : ""),
       }}
