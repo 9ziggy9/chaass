@@ -16,7 +16,7 @@ const newGame = (state) => {
   };
 };
 
-export default function gameReducer(state, action) {
+export default function gameReducer(state={}, action) {
   switch(action.type) {
   case "setHighlight":  return {
     ...state, 
@@ -37,12 +37,8 @@ export default function gameReducer(state, action) {
       }
     };
   }
-  case "debug": {
-    console.log("HELLO, IT WERKS!!!");
-    break;
-  }
   default: {
-    console.log("Huh?");
+    return state;
   }
   }
 };
