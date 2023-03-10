@@ -7,6 +7,7 @@ import (
   "github.com/gorilla/mux"
   "gorm.io/driver/sqlite"
   "gorm.io/gorm"
+  "github.com/rs/cors"
 )
 
 type App struct {
@@ -26,7 +27,7 @@ func (a *App) Initialize(db string) {
 
 func (a *App) Run(port string) {
   log.Println("Listening on port "+port+"...")
-  log.Fatal(http.ListenAndServe(":"+port, a.Router))
+  log.Fatal(http.ListenAndServe(":"+port, cors.Default().Handler(a.Router)))
 }
 
 func (a *App) MigrateModels(ms ...interface{}) {

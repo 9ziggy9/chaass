@@ -1,5 +1,7 @@
 package models
 
-func Hello() string {
-  return "Hello, from game!"
+type Game struct {
+  ID   uint   `gorm:"primaryKey" json:"id"`
+  Name string `json:"name"`
+  PGN  string `gorm:"type:text" json:"pgn"`
 }

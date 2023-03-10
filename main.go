@@ -34,7 +34,6 @@ func main() {
   port, db := loadEnv() // Can exit(1)!
 
   // PURGE
-
   purgeDB(db)
 
   // INITIALIZE
@@ -42,15 +41,16 @@ func main() {
   app.Initialize(db)
 
   // MIGRATE
-  app.MigrateModels(&models.User{})
-
-  app.RunSeeders(seeders.Users)
+  app.MigrateModels(&models.User{}, &models.Game{})
+  app.RunSeeders(seeders.Users, seeders.Games)
 
   // Note how routes are registered via passing a closure defined
   // From API module, quite interesting, this is done to include db
   // connection created on APP in the scope of route handlers
   app.RegisterRoute(api.GenerateZiggy, "/users", "/ziggy", "GET")
   app.RegisterRoute(api.GenerateGetUsers, "/users", "/", "GET")
+  app.RegisterRoute(api.GenerateGetAllGames, "/games", "/", "GET")
+  // app.RegisterRoute(api.GenerateCreateGame, "/games", "/", "POST")
 
   // Make it happen
   app.Run(port)
