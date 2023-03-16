@@ -17,6 +17,7 @@
     --my-light-orange: #d65d0e;
     --my-yellow: #b57614;
     --my-light-yellow: #d79921;
+    --my-modal-overlay: #3C3836BB;
 }
 
 html, body {
@@ -35,6 +36,31 @@ html, body {
     align-items: center;
     justify-content: center;
     color: var(--my-light-yellow);
+}
+
+#modal-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--my-modal-overlay);
+    z-index: 2;
+}
+
+#modal-content {
+    z-index: 3;
 }
 
 #game {
@@ -66,8 +92,8 @@ html, body {
     display: grid;
     grid-template-rows: auto 10fr;
     align-items: center;
-    width: 70vw;
-    height: 90vh;
+    width: 40vw;
+    height: 60vh;
 }
 
 #chat-title {
