@@ -21,7 +21,7 @@ func (a *App) Initialize(db string) {
     log.Fatalf("Error connecting to database: %v\n", err)
     os.Exit(1)
   }
-  a.Router = mux.NewRouter()
+  a.Router = mux.NewRouter().PathPrefix("/api").Subrouter()
   a.DB = conn
 }
 
