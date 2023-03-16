@@ -4,7 +4,7 @@ import {Switch, Route} from "react-router-dom";
 import ReactDOM from "react-dom";
 import {useState, createContext, useContext} from "react";
 
-function ModalPortal({children}) {
+function ModalPortal() {
   const {modal, handleModal, modalContent} = useContext(ModalContext);
   return modal ? ReactDOM.createPortal(
     <div id="modal-container">
