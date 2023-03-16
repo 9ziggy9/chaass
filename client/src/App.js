@@ -46,12 +46,7 @@ const ModalProvider = ({children}) => {
 const ChatModalBtn = () => {
   const {handleModal} = useContext(ModalContext);
   return (
-    <button onClick={() => handleModal(
-      <div>
-        <h2>HELLO WORLD</h2>
-        <p>HERE IS SOME STUFF</p>
-      </div>
-    )}>
+    <button onClick={() => handleModal(<Chat />)}>
       OPEN SESAME
     </button>
   );
