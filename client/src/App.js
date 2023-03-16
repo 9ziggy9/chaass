@@ -6,18 +6,13 @@ import {useState, createContext, useContext} from "react";
 
 function ModalPortal() {
   const {modal, handleModal, modalContent} = useContext(ModalContext);
-  return modal ? ReactDOM.createPortal(
-    <div id="modal-container">
-      <div
-        id="modal-overlay"
-        onClick={() => handleModal()}
-      ></div>
-      <div id="modal-content">
-        {modalContent}
-      </div>
-    </div>,
-    document.getElementById("portal-root")
-  ) : null;
+  return modal
+    ? ReactDOM.createPortal(
+      <div id="modal-container">
+	<div id="modal-overlay" onClick={() => handleModal()}></div>
+	<div id="modal-content">{modalContent}</div>
+      </div>, document.getElementById("portal-root"))
+    : null;
 };
 
 function useModal() {
