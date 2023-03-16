@@ -1,8 +1,11 @@
 import "../index.css";
 import {useState} from "react";
+import {useSelector, useDispatch} from "react-redux";
 
-export default function Chat({state, dispatch}) {
+export default function Chat() {
   const [textAreaValue, setTextAreaValue] = useState("");
+  const dispatch = useDispatch();
+  const chat = useSelector(state => state.chat);
 
   const handleTextArea = (e) => {
     setTextAreaValue(e.target.value);
@@ -16,7 +19,7 @@ export default function Chat({state, dispatch}) {
         <h2 id="chat-title">CHAT</h2>
 	<div id="chat-inner">
           <div id="chat-feed">
-	    {state?.msgs.map((msg,i) =>
+	    {chat?.msgs.map((msg,i) =>
               <div key={`msg-${i}`}
                    className={`${msg.dir ? "inc-msg" : "out-msg"}`}>
                 <p className="msg">

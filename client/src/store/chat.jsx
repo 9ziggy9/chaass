@@ -1,7 +1,7 @@
 const OUT = 0;
 const IN = 1;
 
-export default function chatReducer(state={}, action) {
+export default function chatReducer(state={msgs:[]}, action) {
   switch (action.type) {
   case "sendMessage": return {
     ...state,
